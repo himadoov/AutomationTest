@@ -28,6 +28,7 @@ public class UserAuthenticationTest {
     public void authenticate(String username, String password, boolean expected) {
         boolean actual = auth.authenticate(username, password);
         Assert.assertEquals(actual, expected,
-                "Mismatch for username=" + username + ", password=" + password);
+                "Miss for username=" + username + ", password=" + password);
     }
 }
+
