@@ -1,0 +1,49 @@
+package QABootcamp_Maven.AxsosAcademy;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class AlertsExample {
+    WebDriver driver;
+    String baseUrl = "https://the-internet.herokuapp.com/javascript_alerts";
+
+    @BeforeTest
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(baseUrl);
+    }
+
+    @Test
+    public void handleAlerts() throws InterruptedException {
+        driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+        Alert simpleAlert = driver.switchTo().alert();
+        System.out.println("Simple Alert Text: " + simpleAlert.getText());
+        simpleAlert.accept();
+        Thread.sleep(3000);
+
+        driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+        Alert confirmAlert = driver.switchTo().alert();
+        System.out.println("Confirmation Alert Text: " + confirmAlert.getText());
+        confirmAlert.dismiss(); 
+        Thread.sleep(3000);
+
+        driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+        Alert promptAlert = driver.switchTo().alert();
+        System.out.println("Prompt Alert Text: " + promptAlert.getText());
+        promptAlert.sendKeys("HIMADOOV");
+        Thread.sleep(3000);
+        promptAlert.accept(); 
+
+    }
+
+    //@AfterTest
+    //public void tearDown() {
+    //    if (driver != null) driver.quit();
+    //}
+}
